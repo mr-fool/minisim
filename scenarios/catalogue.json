@@ -1,0 +1,59 @@
+{
+  "note": "Notional objects for demonstration. None of these describe real satellites.",
+  "objects": [
+    {
+      "name": "Hulk-3",
+      "kind": "rocket body",
+      "signature": 1.5,
+      "orbit": {
+        "alt_km": 780,
+        "inc_deg": 65,
+        "raan_deg": 110,
+        "u_deg": 40
+      }
+    },
+    {
+      "name": "Oldsat-1",
+      "kind": "satellite",
+      "orbit": {
+        "alt_km": 1000,
+        "inc_deg": 82,
+        "raan_deg": 200,
+        "u_deg": 300
+      }
+    },
+    {
+      "name": "Oldsat-2",
+      "kind": "satellite",
+      "orbit": {
+        "alt_km": 620,
+        "inc_deg": 97,
+        "raan_deg": 310,
+        "u_deg": 120
+      }
+    },
+    {
+      "name": "Tumbler",
+      "kind": "rocket body",
+      "signature": 1.3,
+      "orbit": {
+        "a_km": 8100,
+        "e": 0.12,
+        "inc_deg": 30,
+        "raan_deg": 60,
+        "argp_deg": 45,
+        "m_deg": 200
+      }
+    },
+    {
+      "name": "Relic",
+      "kind": "satellite",
+      "orbit": {
+        "tle": [
+          "1 90001U 20001A   20001.00000000  .00000000  00000-0  00000-0 0  0001",
+          "2 90001  45.0000 120.0000 0010000  90.0000 180.0000 13.90000000    10"
+        ]
+      }
+    }
+  ]
+}

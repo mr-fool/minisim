@@ -1,0 +1,274 @@
+{
+  "domain": "space",
+  "name": "Orbital Watch",
+  "dt": 10,
+  "end_time": 7200,
+  "settings": {
+    "conjunction_km": 10,
+    "collision_km": 0.1,
+    "debris_per_object": 8,
+    "avoid_km": 2,
+    "avoid_dv_kms": 0.001
+  },
+  "catalogue": "catalogue.json",
+  "objects": [
+    {
+      "name": "Beacon",
+      "side": "blue",
+      "orbit": {
+        "alt_km": 1200,
+        "inc_deg": 55,
+        "raan_deg": 20,
+        "u_deg": 0
+      },
+      "avoid": true,
+      "dv_kms": 0.05
+    },
+    {
+      "name": "Sentinel",
+      "side": "blue",
+      "orbit": {
+        "alt_km": 1400,
+        "inc_deg": 55,
+        "raan_deg": 40,
+        "u_deg": 175
+      },
+      "sensors": [
+        {
+          "kind": "space",
+          "range_km": 600,
+          "sigma_km": 0.05,
+          "p_detect": 0.95
+        }
+      ]
+    },
+    {
+      "name": "Courier",
+      "side": "blue",
+      "orbit": {
+        "alt_km": 300,
+        "inc_deg": 60,
+        "raan_deg": 15,
+        "u_deg": 0
+      },
+      "dv_kms": 0.5,
+      "sequence": [
+        {
+          "at": 300,
+          "do": "hohmann",
+          "alt_km": 850
+        }
+      ]
+    },
+    {
+      "name": "Prowler",
+      "side": "red",
+      "orbit": {
+        "alt_km": 900,
+        "inc_deg": 55,
+        "raan_deg": 40,
+        "u_deg": 165
+      },
+      "dv_kms": 1.0,
+      "sequence": [
+        {
+          "at": 600,
+          "do": "rendezvous",
+          "target": "Sentinel",
+          "tof_s": 3000,
+          "standoff_km": 20
+        },
+        {
+          "at": 4500,
+          "do": "rendezvous",
+          "target": "Sentinel",
+          "tof_s": 1500,
+          "standoff_km": 2
+        }
+      ]
+    },
+    {
+      "from_catalogue": "Hulk-3"
+    },
+    {
+      "from_catalogue": "Oldsat-1"
+    },
+    {
+      "from_catalogue": "Oldsat-2"
+    },
+    {
+      "from_catalogue": "Tumbler"
+    },
+    {
+      "from_catalogue": "Relic"
+    },
+    {
+      "name": "Derelict",
+      "kind": "satellite",
+      "orbit": {
+        "intercept": {
+          "with": "Hulk-3",
+          "at_s": 1800,
+          "inc_deg": 80,
+          "miss_km": 0.0
+        }
+      }
+    },
+    {
+      "name": "Shard",
+      "kind": "rocket body",
+      "orbit": {
+        "intercept": {
+          "with": "Beacon",
+          "at_s": 3000,
+          "inc_deg": 85,
+          "miss_km": 0.4
+        }
+      }
+    }
+  ],
+  "constellations": [
+    {
+      "name": "Lookout",
+      "side": "blue",
+      "sats": 12,
+      "planes": 3,
+      "phasing": 1,
+      "alt_km": 800,
+      "inc_deg": 60,
+      "payload": {
+        "type": "isr",
+        "min_elev_deg": 15
+      }
+    }
+  ],
+  "stations": [
+    {
+      "name": "North Radar",
+      "side": "blue",
+      "lat": 60,
+      "lon": -150,
+      "sensors": [
+        {
+          "kind": "radar",
+          "range_km": 3500,
+          "min_elev_deg": 10,
+          "sigma_km": 0.1,
+          "p_detect": 0.9
+        }
+      ]
+    },
+    {
+      "name": "Island Radar",
+      "side": "blue",
+      "lat": 10,
+      "lon": 165,
+      "sensors": [
+        {
+          "kind": "radar",
+          "range_km": 3500,
+          "min_elev_deg": 10,
+          "sigma_km": 0.1,
+          "p_detect": 0.9
+        }
+      ]
+    },
+    {
+      "name": "South Radar",
+      "side": "blue",
+      "lat": -30,
+      "lon": 25,
+      "sensors": [
+        {
+          "kind": "radar",
+          "range_km": 3500,
+          "min_elev_deg": 10,
+          "sigma_km": 0.1,
+          "p_detect": 0.9
+        }
+      ]
+    },
+    {
+      "name": "Desert Optical",
+      "side": "blue",
+      "lat": 32,
+      "lon": -105,
+      "sensors": [
+        {
+          "kind": "optical",
+          "range_km": 40000,
+          "min_elev_deg": 20,
+          "sigma_km": 0.5,
+          "p_detect": 0.8
+        }
+      ]
+    },
+    {
+      "name": "Steppe Radar",
+      "side": "red",
+      "lat": 50,
+      "lon": 70,
+      "sensors": [
+        {
+          "kind": "radar",
+          "range_km": 3500,
+          "min_elev_deg": 10,
+          "sigma_km": 0.1,
+          "p_detect": 0.9
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "name": "Area A",
+      "lat": 35,
+      "lon": 45
+    },
+    {
+      "name": "Area B",
+      "lat": 0,
+      "lon": 110
+    },
+    {
+      "name": "Area C",
+      "lat": -45,
+      "lon": -70
+    }
+  ],
+  "trade": {
+    "duration_s": 86400,
+    "step_s": 60,
+    "min_elev_deg": 15,
+    "designs": [
+      {
+        "name": "6 in 2 planes",
+        "sats": 6,
+        "planes": 2,
+        "alt_km": 800,
+        "inc_deg": 60
+      },
+      {
+        "name": "12 in 3 planes",
+        "sats": 12,
+        "planes": 3,
+        "alt_km": 800,
+        "inc_deg": 60
+      },
+      {
+        "name": "24 in 4 planes",
+        "sats": 24,
+        "planes": 4,
+        "alt_km": 800,
+        "inc_deg": 60
+      },
+      {
+        "name": "12 in 3, higher",
+        "sats": 12,
+        "planes": 3,
+        "alt_km": 1400,
+        "inc_deg": 60
+      }
+    ]
+  }
+}

@@ -1,0 +1,390 @@
+{
+  "name": "Border Patrol",
+  "world": {
+    "width": 300,
+    "height": 200
+  },
+  "dt": 2,
+  "end_time": 3600,
+  "terrain": {
+    "hills": [
+      {
+        "x": 170,
+        "y": 150,
+        "height_km": 1.8,
+        "radius_km": 14
+      },
+      {
+        "x": 175,
+        "y": 55,
+        "height_km": 1.5,
+        "radius_km": 12
+      },
+      {
+        "x": 115,
+        "y": 100,
+        "height_km": 1.0,
+        "radius_km": 10
+      }
+    ]
+  },
+  "templates": {
+    "fighter": {
+      "kind": "fighter",
+      "domain": "air",
+      "symbol": "f",
+      "max_speed": 0.25,
+      "hp": 1,
+      "comms_km": 150,
+      "sensors": [
+        {
+          "name": "nose radar",
+          "range_km": 60,
+          "fov_deg": 120,
+          "p_detect": 0.85,
+          "scan_s": 4,
+          "domains": [
+            "air"
+          ]
+        }
+      ],
+      "weapons": [
+        {
+          "name": "air missile",
+          "range_km": 35,
+          "speed_kms": 1.0,
+          "pk": 0.5,
+          "damage": 1,
+          "ammo": 4,
+          "reload_s": 8,
+          "domains": [
+            "air"
+          ]
+        },
+        {
+          "name": "ground missile",
+          "range_km": 25,
+          "speed_kms": 0.3,
+          "pk": 0.7,
+          "damage": 2,
+          "ammo": 2,
+          "reload_s": 6,
+          "domains": [
+            "ground"
+          ]
+        }
+      ],
+      "altitude": 8,
+      "climb_rate": 0.08,
+      "fuel": 1000,
+      "burn_per_km": 1.0,
+      "turnaround_s": 300
+    },
+    "scout": {
+      "kind": "scout",
+      "domain": "air",
+      "symbol": "s",
+      "max_speed": 0.15,
+      "hp": 1,
+      "signature": 1.3,
+      "comms_km": 250,
+      "sensors": [
+        {
+          "name": "wide radar",
+          "range_km": 140,
+          "p_detect": 0.9,
+          "scan_s": 6,
+          "domains": [
+            "air",
+            "ground"
+          ]
+        }
+      ],
+      "behaviors": [
+        "orders",
+        "retreat",
+        "patrol",
+        "hold"
+      ],
+      "altitude": 10,
+      "climb_rate": 0.04,
+      "fuel": 1200,
+      "burn_per_km": 1.0,
+      "turnaround_s": 300
+    },
+    "radar": {
+      "kind": "radar",
+      "domain": "ground",
+      "symbol": "r",
+      "hp": 2,
+      "comms_km": 200,
+      "sensors": [
+        {
+          "name": "search radar",
+          "range_km": 110,
+          "p_detect": 0.9,
+          "scan_s": 6,
+          "domains": [
+            "air"
+          ]
+        }
+      ],
+      "behaviors": [
+        "hold"
+      ]
+    },
+    "launcher": {
+      "kind": "launcher",
+      "domain": "ground",
+      "symbol": "l",
+      "hp": 2,
+      "signature": 0.6,
+      "comms_km": 200,
+      "sensors": [
+        {
+          "name": "fire radar",
+          "range_km": 55,
+          "p_detect": 0.8,
+          "scan_s": 4,
+          "domains": [
+            "air"
+          ]
+        }
+      ],
+      "weapons": [
+        {
+          "name": "interceptor",
+          "range_km": 40,
+          "speed_kms": 0.9,
+          "pk": 0.45,
+          "damage": 1,
+          "ammo": 6,
+          "reload_s": 12,
+          "domains": [
+            "air"
+          ]
+        }
+      ],
+      "behaviors": [
+        "engage",
+        "hold"
+      ]
+    },
+    "jammer": {
+      "kind": "jammer",
+      "domain": "air",
+      "symbol": "j",
+      "max_speed": 0.2,
+      "hp": 1,
+      "signature": 1.3,
+      "comms_km": 200,
+      "altitude": 9,
+      "climb_rate": 0.04,
+      "fuel": 1200,
+      "burn_per_km": 1.0,
+      "turnaround_s": 300,
+      "jammers": [
+        {
+          "name": "noise jammer",
+          "range_km": 90,
+          "strength": 0.6
+        }
+      ],
+      "behaviors": [
+        "orders",
+        "retreat",
+        "patrol",
+        "hold"
+      ]
+    },
+    "drone": {
+      "kind": "drone",
+      "domain": "air",
+      "symbol": "d",
+      "icon": "drone",
+      "expendable": true,
+      "max_speed": 0.08,
+      "hp": 1,
+      "signature": 0.4,
+      "comms_km": 150,
+      "altitude": 0.5,
+      "climb_rate": 0.03,
+      "fuel": 600,
+      "burn_per_km": 1.0,
+      "behaviors": [
+        "orders",
+        {
+          "name": "one_way_attack",
+          "pk": 0.7,
+          "damage": 2,
+          "blast_km": 1.5,
+          "seek_km": 30
+        }
+      ]
+    }
+  },
+  "platforms": [
+    {
+      "name": "Hawk1",
+      "template": "fighter",
+      "side": "blue",
+      "pos": [20, 130],
+      "waypoints": [
+        [150, 140],
+        [150, 100],
+        [60, 100],
+        [60, 140]
+      ]
+    },
+    {
+      "name": "Hawk2",
+      "template": "fighter",
+      "side": "blue",
+      "pos": [20, 120],
+      "waypoints": [
+        [150, 130],
+        [150, 90],
+        [60, 90],
+        [60, 130]
+      ]
+    },
+    {
+      "name": "Hawk3",
+      "template": "fighter",
+      "side": "blue",
+      "pos": [20, 70],
+      "waypoints": [
+        [150, 70],
+        [150, 40],
+        [60, 40],
+        [60, 70]
+      ]
+    },
+    {
+      "name": "Hawk4",
+      "template": "fighter",
+      "side": "blue",
+      "pos": [20, 60],
+      "waypoints": [
+        [150, 60],
+        [150, 30],
+        [60, 30],
+        [60, 60]
+      ]
+    },
+    {
+      "name": "Owl",
+      "template": "scout",
+      "side": "blue",
+      "pos": [15, 100],
+      "waypoints": [
+        [60, 120],
+        [60, 80]
+      ]
+    },
+    {
+      "name": "Crow",
+      "template": "jammer",
+      "side": "blue",
+      "pos": [15, 90],
+      "waypoints": [
+        [130, 110],
+        [130, 80]
+      ]
+    },
+    {
+      "name": "Wasp1",
+      "template": "drone",
+      "side": "blue",
+      "pos": [40, 150],
+      "waypoints": [
+        [120, 175],
+        [225, 130]
+      ]
+    },
+    {
+      "name": "Wasp2",
+      "template": "drone",
+      "side": "blue",
+      "pos": [40, 140],
+      "waypoints": [
+        [130, 125],
+        [225, 130]
+      ]
+    },
+    {
+      "name": "Wasp3",
+      "template": "drone",
+      "side": "blue",
+      "pos": [40, 50],
+      "waypoints": [
+        [130, 25],
+        [225, 65]
+      ]
+    },
+    {
+      "name": "Wasp4",
+      "template": "drone",
+      "side": "blue",
+      "pos": [40, 95],
+      "waypoints": [
+        [140, 80],
+        [250, 100]
+      ]
+    },
+    {
+      "name": "Viper1",
+      "template": "fighter",
+      "side": "red",
+      "pos": [280, 140],
+      "waypoints": [
+        [190, 150],
+        [190, 110],
+        [260, 110],
+        [260, 150]
+      ]
+    },
+    {
+      "name": "Viper2",
+      "template": "fighter",
+      "side": "red",
+      "pos": [280, 100],
+      "waypoints": [
+        [190, 100],
+        [190, 70],
+        [260, 70],
+        [260, 100]
+      ]
+    },
+    {
+      "name": "Viper3",
+      "template": "fighter",
+      "side": "red",
+      "pos": [280, 50],
+      "waypoints": [
+        [190, 50],
+        [190, 20],
+        [260, 20],
+        [260, 50]
+      ]
+    },
+    {
+      "name": "Watch",
+      "template": "radar",
+      "side": "red",
+      "pos": [250, 100]
+    },
+    {
+      "name": "Fang1",
+      "template": "launcher",
+      "side": "red",
+      "pos": [225, 130]
+    },
+    {
+      "name": "Fang2",
+      "template": "launcher",
+      "side": "red",
+      "pos": [225, 65]
+    }
+  ]
+}
